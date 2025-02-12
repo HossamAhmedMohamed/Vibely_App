@@ -144,6 +144,15 @@ abstract class AppStyle {
       fontWeight: FontWeight.w400,
     );
   }
+
+  static TextStyle styleRegular22(BuildContext context) {
+    return TextStyle(
+      color: const Color(0xFF5C5858),
+      fontSize: getResponsiveFontSize(context , fontSize: 22),
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w400,
+    );
+  }
 }
 
 double getResponsiveFontSize(BuildContext context, {required double fontSize}) {

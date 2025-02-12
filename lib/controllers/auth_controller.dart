@@ -104,51 +104,6 @@ class AuthController {
     }
   }
 
-  // static Future<Map<String, dynamic>> checkLogin() async {
-  //   try {
-  //     bool isLoggedIn = (await flutterSecureStorage.read(
-  //                 key: "is_logged_in")) ==
-  //             null
-  //         ? false
-  //         : bool.parse((await flutterSecureStorage.read(key: "is_logged_in"))!);
-  //     if (isLoggedIn == false) {
-  //       return {
-  //         "result": false,
-  //         "message": "Please login again!!",
-  //       };
-  //     }
-
-  //     var email = await flutterSecureStorage.read(key: "login_email");
-  //     var password = await flutterSecureStorage.read(key: "login_password");
-
-  //     var res = await Supabase.instance.client.auth.signInWithPassword(
-  //       password: password!,
-  //       email: email!.toLowerCase().trim(),
-  //     );
-
-  //     if (res.user == null) {
-  //       return {
-  //         "result": false,
-  //         "message": "Error while login!!",
-  //       };
-  //     }
-
-  //     return {
-  //       "result": true,
-  //       "message": "Logged in successfully ... ",
-  //       "data": {
-  //         ...res.user!.toJson(),
-  //       },
-  //     };
-  //   } on AuthException catch (e) {
-  //     print(e.message.toString());
-  //     return {
-  //       "result": false,
-  //       "message": e.message,
-  //     };
-  //   }
-  // }
-
    static Future<void> logOut() async {
     try {
       try {
@@ -164,6 +119,55 @@ class AuthController {
       }
     } catch (e) {
       print(e.toString());
+    }
+  }
+
+
+  static Future<Map<String, dynamic>> getCurrentUserData() async {
+    try {
+      var uid = await flutterSecureStorage.read(
+        key: "uid",
+      );
+
+      if (uid == null) {
+        return {
+          "result": false,
+          "message": "Please login again!!",
+        };
+      }
+
+      var res = Supabase.instance.client.auth.currentUser!.toJson();
+
+      return {
+        "result": true,
+        "message": "Retrieved successfully .. ",
+        "data": res,
+      };
+    } catch (e) {
+      return {
+        "result": false,
+        "message": e.toString(),
+      };
+    }
+  }
+
+   static Future<Map<String, dynamic>> updateCurrentUserData(
+      Map<String, dynamic> data) async {
+    try {
+      await Supabase.instance.client.auth.updateUser(UserAttributes(data: {
+        ...data,
+      }));
+
+      return {
+        "result": true,
+        "message": "Updated successfully ... ",
+      };
+    } catch (e) {
+      print(e.toString());
+      return {
+        "result": false,
+        "message": e.toString(),
+      };
     }
   }
 }
