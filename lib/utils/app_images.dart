@@ -9,5 +9,9 @@ class Assets {
   /// Assets for imagesMerhabaLogoLight
   /// assets/images/MerhabaLogoLight.png
   static const String imagesMerhabaLogoLight = "assets/images/MerhabaLogoLight.png";
+
+  /// Assets for imagesProfileAvatar
+  /// assets/images/profile_avatar.png
+  static const String imagesProfileAvatar = "assets/images/profile_avatar.png";
 }
 

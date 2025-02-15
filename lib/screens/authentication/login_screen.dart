@@ -97,6 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (res["result"] == true) {
                             Navigator.pushNamedAndRemoveUntil(
                                 context, homeScreen, (routes) => false);
+                                loadingProvider.toggleLoading();
                           } else {
                             loadingProvider.toggleLoading();
                             Fluttertoast.showToast(

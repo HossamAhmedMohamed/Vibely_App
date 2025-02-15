@@ -96,7 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   fluent_ui.InfoLabel(
                     label: 'Confirm your password:',
                     child: fluent_ui.TextBox(
-                      placeholder: 'confirm your password',
+                      placeholder: 'Confirm your password',
                       expands: false,
                       controller: confirmPasswordController,
                       obscureText: isVisible,
