@@ -1,6 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:social_media_app/providers/profile_tap_provider.dart';
 import 'package:social_media_app/utils/app_styles.dart';
 import 'package:social_media_app/utils/pages_name.dart';
 
@@ -20,7 +22,8 @@ class HomeTap extends StatelessWidget {
           child: Column(
             children: [
               InkWell(
-                onTap: () {
+                onTap: () async {
+                  await Provider.of<ProfileTapProvider>(context , listen: false).getData();
                   Navigator.of(context, rootNavigator: true)
                       .pushNamed(postScreen);
                 },
@@ -43,9 +46,9 @@ class HomeTap extends StatelessWidget {
                             style: AppStyle.styleRegular22(context)
                                 .copyWith(color: Colors.white),
                           ),
-
-                          Icon(Icons.photo,
-                          size: 25,
+                          Icon(
+                            Icons.photo,
+                            size: 25,
                           )
                         ],
                       ),
