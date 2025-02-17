@@ -1,6 +1,7 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media_app/providers/profile_tap_provider.dart';
 import 'package:social_media_app/utils/app_styles.dart';
@@ -13,9 +14,21 @@ class HomeTap extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Home'),
-      ),
+          centerTitle: false,
+          title: Text(
+            'MERHABA',
+            style: AppStyle.styleSemiBold28(context)
+                .copyWith(color: Colors.white, fontFamily: 'Inter'),
+          )
+              .animate(
+                onPlay: (controller) => controller.repeat(),
+              )
+              .shimmer(duration: 3000.ms, color: const Color(0xFF80DDFF))
+              .animate(
+                  // onPlay: (controller) => controller.repeat(),
+                  ) // this wraps the previous Animate in another Animate
+              .fadeIn(duration: 1200.ms, curve: Curves.easeOutQuad)
+              .slide()),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: SingleChildScrollView(
@@ -23,7 +36,8 @@ class HomeTap extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () async {
-                  await Provider.of<ProfileTapProvider>(context , listen: false).getData();
+                  await Provider.of<ProfileTapProvider>(context, listen: false)
+                      .getData();
                   Navigator.of(context, rootNavigator: true)
                       .pushNamed(postScreen);
                 },
@@ -58,7 +72,15 @@ class HomeTap extends StatelessWidget {
                     ],
                   ),
                 ),
-              )
+              ),
+              // Container(
+              //   height: 2,
+              //   color: const Color(0x8080DDFF),
+              //   margin: const EdgeInsets.symmetric(vertical: 5),
+              // ).animate().scale(
+              //       duration: 1200.ms,
+              //       alignment: Alignment.centerLeft,
+              //     ),
             ],
           ),
         ),

@@ -10,10 +10,12 @@ import 'package:provider/provider.dart';
 import 'package:social_media_app/firebase_options.dart';
 import 'package:social_media_app/providers/app_settings_provider.dart';
 import 'package:social_media_app/providers/home_screen_provider.dart';
+import 'package:social_media_app/providers/location_viewer_provider.dart';
 import 'package:social_media_app/providers/login_provider.dart';
 import 'package:social_media_app/providers/new_post_provider.dart';
 import 'package:social_media_app/providers/profile_tap_provider.dart';
 import 'package:social_media_app/providers/sign_up_provider.dart';
+import 'package:social_media_app/providers/time_line_provider.dart';
 import 'package:social_media_app/routing.dart';
 import 'package:social_media_app/utils/pages_name.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -71,7 +73,9 @@ void main() async {
       ChangeNotifierProvider(create: (_) => HomeScreenProvider()),
       ChangeNotifierProvider(create: (_) => ProfileTapProvider()),
       ChangeNotifierProvider(create: (_) => AppSettingsProvider()),
-      ChangeNotifierProvider(create: (_)=> NewPostProvider())
+      ChangeNotifierProvider(create: (_)=> NewPostProvider()),
+      ChangeNotifierProvider(create: (_)=> LocationViewerProvider()),
+      ChangeNotifierProvider(create: (_)=> TimeLineProvider())
     ],
     child: MyApp(
       appRouter: AppRouter(),

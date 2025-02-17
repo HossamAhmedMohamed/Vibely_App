@@ -5,6 +5,7 @@ import 'package:social_media_app/screens/authentication/login_screen.dart';
 import 'package:social_media_app/screens/authentication/sign_up_screen.dart';
 import 'package:social_media_app/screens/general/home_screen.dart';
 import 'package:social_media_app/screens/general/welcome_screen.dart';
+import 'package:social_media_app/screens/location/location_viewer.dart';
 import 'package:social_media_app/screens/taps/home/new_post.dart';
 import 'package:social_media_app/screens/taps/profile/app_settings.dart';
 import 'package:social_media_app/utils/pages_name.dart';
@@ -29,6 +30,9 @@ class AppRouter {
 
       case postScreen:
         return MaterialPageRoute(builder: (context) => NewPost());
+
+      case locationScreen:
+        return MaterialPageRoute(builder: (context) => LocationViewer());
     }
   }
 }
