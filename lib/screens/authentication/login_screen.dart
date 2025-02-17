@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media_app/controllers/auth_controller.dart';
 import 'package:social_media_app/providers/login_provider.dart';
+import 'package:social_media_app/providers/time_line_provider.dart';
 import 'package:social_media_app/utils/app_images.dart';
 import 'package:social_media_app/utils/app_styles.dart';
 import 'package:social_media_app/utils/pages_name.dart';
@@ -95,9 +96,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               emailController.text, passwordController.text);
 
                           if (res["result"] == true) {
+                            final timelineProvider =
+                                Provider.of<TimeLineProvider>(
+                              context, listen: false
+                            );
+
+                            timelineProvider.getData();
+
                             Navigator.pushNamedAndRemoveUntil(
                                 context, homeScreen, (routes) => false);
-                                loadingProvider.toggleLoading();
+                            loadingProvider.toggleLoading();
                           } else {
                             loadingProvider.toggleLoading();
                             Fluttertoast.showToast(

@@ -3,7 +3,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_media_app/main.dart';
+import 'package:social_media_app/providers/time_line_provider.dart';
 import 'package:social_media_app/utils/app_images.dart';
 import 'package:social_media_app/utils/pages_name.dart';
 
@@ -18,7 +20,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Timer? timer;
 
   int timerStart = 2;
-    final isLoggedIn = flutterSecureStorage.read(
+  final isLoggedIn = flutterSecureStorage.read(
     key: "is_logged_in",
   );
   startTimer() {
@@ -29,11 +31,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         //   return LoginScreen();
         // }));
         try {
-           
           String? loggedIn = await isLoggedIn;
           if (loggedIn == null) {
             Navigator.of(context).pushReplacementNamed(loginScreen);
           } else {
+            final timelineProvider = Provider.of<TimeLineProvider>(
+              context, listen: false
+            );
+
+            timelineProvider.getData();
+
             Navigator.pushReplacementNamed(context, homeScreen);
           }
         } catch (e) {
